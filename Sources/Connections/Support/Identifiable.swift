@@ -8,3 +8,7 @@ extension CNContact: Identifiable {
 extension CNGroup: Identifiable {
     public var id: String { identifier }
 }
+
+extension CNContainer: Identifiable {
+    public var id: String { identifier }
+}

@@ -60,7 +60,7 @@ public enum ContactKey: String {
     case instantMessageAddresses
     /// The note attached to this contact. See notes about additional entitlement requirements.
     ///
-    /// Requires additional [ entitlement](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_contacts_notes).
+    /// Requires additional [entitlement](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_contacts_notes).
     case note
 
     public var rawValue: String {
@@ -99,6 +99,7 @@ public enum ContactKey: String {
 }
 
 public extension Array where Element == ContactKey {
+    /// Includes all known keys excluding `.note` since that requires an additional [entitlement](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_contacts_notes) and permission from apple.
     static var allExcludingNote: Self {
         [
             .type, .namePrefix, .nameSuffix, .previousFamilyName,
