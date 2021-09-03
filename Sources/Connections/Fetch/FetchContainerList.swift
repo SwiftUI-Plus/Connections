@@ -9,6 +9,14 @@ public struct FetchContainerList: DynamicProperty {
     public var wrappedValue: [CNContainer] {
         observer.results
     }
+
+    public init() {
+        self.init(predicate: nil)
+    }
+
+    internal init(observer: ContainersObserver) {
+        self.observer = observer
+    }
 }
 
 public extension FetchContainerList {

@@ -10,6 +10,14 @@ public struct FetchContactList: DynamicProperty {
     public var wrappedValue: [CNContact] {
         observer.results
     }
+
+    public init() {
+        self.init(keysToFetch: .allExcludingNote)
+    }
+
+    internal init(observer: ContactsObserver) {
+        self.observer = observer
+    }
 }
 
 public extension FetchContactList {

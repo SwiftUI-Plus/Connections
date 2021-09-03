@@ -12,6 +12,40 @@ A set of SwiftUI dynamic property wrappers that provide a more familiar API for 
 
 ## Example
 
+### Containers
+
+Fetch a list of containers:
+
+```swift
+@FetchContainerList private var containers
+```
+
+There are of course additional initializers that allow you to filter the result:
+
+```swift
+@FetchContainerList(
+    forContact: contact.identifier
+) private var containers
+```
+
+### Groups
+
+Fetch a list of groups:
+
+```swift
+@FetchGroupList private var groups
+```
+
+Similar to containers, you can also filter the results:
+
+```swift
+@FetchGroupList(
+    inContainer: container.identifier
+) private var groups
+```
+
+### Contacts
+
 ```swift
 @FetchContactList(
     keysToFetch: [
@@ -23,6 +57,8 @@ A set of SwiftUI dynamic property wrappers that provide a more familiar API for 
     sortOrder: .givenName
 ) private var contacts
 ```
+
+> All property wrappers provide standard SwiftUI animation properties. If you don't include this value, the value defaults to `.default`
 
 ## Installation
 

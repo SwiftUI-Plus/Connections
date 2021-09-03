@@ -9,6 +9,14 @@ public struct FetchGroupList: DynamicProperty {
     public var wrappedValue: [CNGroup] {
         observer.results
     }
+
+    public init() {
+        self.init(predicate: nil)
+    }
+
+    internal init(observer: GroupsObserver) {
+        self.observer = observer
+    }
 }
 
 public extension FetchGroupList {
