@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Connections",
+        "repositoryURL": "https://github.com/SwiftUI-Plus/Connections.git",
+        "state": {
+          "branch": null,
+          "revision": "e63559a4c0140f9528f8876a90d3d47e83cafe7a",
+          "version": "1.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
