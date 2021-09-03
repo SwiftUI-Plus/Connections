@@ -1,3 +1,7 @@
+![ios](https://img.shields.io/badge/iOS-13-green)
+![watch](https://img.shields.io/badge/watchOS-6-green)
+![mac](https://img.shields.io/badge/macOS-10.15-green)
+
 # Connections
 
 A set of SwiftUI dynamic property wrappers that provide a more familiar API for accessing the Contacts framework.
@@ -67,8 +71,6 @@ The code is packaged as a framework. You can install manually (by copying the fi
 To install using Swift Package Manager, add this to the `dependencies` section of your `Package.swift` file:
 
 `.package(url: "https://github.com/SwiftUI-Plus/Connections.git", .upToNextMinor(from: "1.0.0"))`
-
-> Note: The package requires iOS v13+
 
 ## Other Packages
 
