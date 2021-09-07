@@ -6,7 +6,6 @@ internal final class GroupsObserver: NSObject, ObservableObject {
     @Published internal var results: [CNGroup] = []
 
     internal let store = CNContactStore()
-    private let queue = DispatchQueue(label: "com.benkau.contacts-observer")
     private var cancellable: AnyCancellable?
 
     private let predicate: NSPredicate?
@@ -28,21 +27,16 @@ internal final class GroupsObserver: NSObject, ObservableObject {
     }
 
     private func refetch(animated: Bool) {
-        queue.async { [weak self] in
-            guard let self = self else { return }
-            var groups: [CNGroup] = []
+        var groups: [CNGroup] = []
 
-            defer {
-                DispatchQueue.main.async {
-                    withAnimation(animated ? self.animation : nil) { self.results = groups }
-                }
-            }
+        defer {
+            withAnimation(animated ? self.animation : nil) { self.results = groups }
+        }
 
-            do {
-                groups = try self.store.groups(matching: self.predicate)
-            } catch {
-                print(error)
-            }
+        do {
+            groups = try self.store.groups(matching: self.predicate)
+        } catch {
+            print(error)
         }
     }
 }

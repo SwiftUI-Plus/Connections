@@ -6,7 +6,6 @@ internal final class ContactsObserver: NSObject, ObservableObject {
     @Published internal var results: [CNContact] = []
 
     internal let store = CNContactStore()
-    private let queue = DispatchQueue(label: "com.benkau.contacts-observer")
     private var cancellable: AnyCancellable?
 
     private let request: CNContactFetchRequest
@@ -28,23 +27,18 @@ internal final class ContactsObserver: NSObject, ObservableObject {
     }
 
     private func refetch(animated: Bool) {
-        queue.async { [weak self] in
-            guard let self = self else { return }
-            var contacts: [CNContact] = []
+        var contacts: [CNContact] = []
 
-            defer {
-                DispatchQueue.main.async {
-                    withAnimation(animated ? self.animation : nil) { self.results = contacts }
-                }
-            }
+        defer {
+            withAnimation(animated ? self.animation : nil) { self.results = contacts }
+        }
 
-            do {
-                try self.store.enumerateContacts(with: self.request) { contact, _ in
-                    contacts.append(contact)
-                }
-            } catch {
-                print(error)
+        do {
+            try self.store.enumerateContacts(with: self.request) { contact, _ in
+                contacts.append(contact)
             }
+        } catch {
+            print(error)
         }
     }
 }

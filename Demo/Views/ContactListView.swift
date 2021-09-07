@@ -6,6 +6,9 @@ struct ContactListView: View {
     // This is the only code required to fetch your contacts list
     @FetchContactList private var contacts
 
+    @State private var selectedContact: CNContact?
+    @State private var showContact: Bool = false
+
     @State private var promptAddContact: Bool = false
     @State private var error: Error?
 
@@ -31,7 +34,10 @@ struct ContactListView: View {
                     .foregroundColor(.secondary)
             } else {
                 List(contacts) { contact in
-                    NavigationLink(destination: ContactView(identifier: contact.identifier)) {
+                    Button {
+                        selectedContact = contact
+                        showContact = true
+                    } label: {
                         if contact.contactType == .person {
                             HStack {
                                 Image(systemName: "person.crop.circle")
@@ -50,10 +56,24 @@ struct ContactListView: View {
                         }
                     }
                 }
+                .background(contactLink)
             }
         }
         .navigationBarTitle("Contacts")
         .navigationBarItems(trailing: addButton)
+    }
+
+    @ViewBuilder
+    private var contactLink: some View {
+        if let contact = selectedContact {
+            NavigationLink.init(
+                "",
+                destination: ContactView(identifier: contact.identifier),
+                isActive: $showContact
+            )
+        } else {
+            EmptyView()
+        }
     }
 
     private var addButton: some View {

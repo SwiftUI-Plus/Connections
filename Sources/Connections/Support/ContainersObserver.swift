@@ -6,7 +6,6 @@ internal final class ContainersObserver: NSObject, ObservableObject {
     @Published internal var results: [CNContainer] = []
 
     internal let store = CNContactStore()
-    private let queue = DispatchQueue(label: "com.benkau.contacts-observer")
     private var cancellable: AnyCancellable?
 
     private let predicate: NSPredicate?
@@ -28,21 +27,16 @@ internal final class ContainersObserver: NSObject, ObservableObject {
     }
 
     private func refetch(animated: Bool) {
-        queue.async { [weak self] in
-            guard let self = self else { return }
-            var containers: [CNContainer] = []
+        var containers: [CNContainer] = []
 
-            defer {
-                DispatchQueue.main.async {
-                    withAnimation(animated ? self.animation : nil) { self.results = containers }
-                }
-            }
+        defer {
+            withAnimation(animated ? self.animation : nil) { self.results = containers }
+        }
 
-            do {
-                containers = try self.store.containers(matching: self.predicate)
-            } catch {
-                print(error)
-            }
+        do {
+            containers = try self.store.containers(matching: self.predicate)
+        } catch {
+            print(error)
         }
     }
 }
