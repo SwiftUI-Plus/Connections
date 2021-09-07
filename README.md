@@ -4,15 +4,17 @@
 
 # Connections
 
+> Also available as a part of my [SwiftUI+ Collection](https://benkau.com/packages.json) – just add it to Xcode 13+
+
 A set of SwiftUI dynamic property wrappers that provide a more familiar API for accessing the Contacts framework.
 
-> A full demo is included in this repo.
+A full demo is included in this repo.
 
 ## Features
 
-- Familiar API, matches CoreData's new FetchRequest APIs
-- Animation support
-- View's automatically update to reflect remote changes
+-   Familiar API, matches CoreData's new FetchRequest APIs
+-   Animation support
+-   View's automatically update to reflect remote changes
 
 ## Example
 
@@ -66,7 +68,7 @@ Similar to containers, you can also filter the results:
 
 ## Installation
 
-The code is packaged as a framework. You can install manually (by copying the files in the `Sources` directory) or using Swift Package Manager (__preferred__)
+The code is packaged as a framework. You can install manually (by copying the files in the `Sources` directory) or using Swift Package Manager (**preferred**)
 
 To install using Swift Package Manager, add this to the `dependencies` section of your `Package.swift` file:
 
@@ -77,4 +79,3 @@ To install using Swift Package Manager, add this to the `dependencies` section o
 If you want easy access to this and more packages, add the following collection to your Xcode 13+ configuration:
 
 `https://benkau.com/packages.json`
-
