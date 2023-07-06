@@ -1,8 +1,8 @@
 import Foundation
 import Contacts
 
-extension CNContact: Identifiable {
-    public var id: UUID { UUID(uuidString: identifier)! }
+extension CNContact {
+    public var id: String { identifier }
 }
 
 extension CNGroup: Identifiable {

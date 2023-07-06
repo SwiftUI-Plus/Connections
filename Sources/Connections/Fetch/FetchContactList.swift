@@ -115,7 +115,7 @@ public extension FetchContactList {
     ///   - sortOrder: The sort order to return the results
     ///   - unified: If true, unified contacts will be returned unifed
     init(
-        identifiers: [UUID],
+        identifiers: [String],
         keysToFetch: [ContactKey],
         sortOrder: CNContactSortOrder = .userDefault,
         unified: Bool = true,
@@ -124,7 +124,7 @@ public extension FetchContactList {
         self.init(
             keysToFetch: keysToFetch,
             sortOrder: sortOrder,
-            predicate: CNContact.predicateForContacts(withIdentifiers: identifiers.map { $0.uuidString }),
+            predicate: CNContact.predicateForContacts(withIdentifiers: identifiers),
             unified: unified,
             animation: animation
         )
