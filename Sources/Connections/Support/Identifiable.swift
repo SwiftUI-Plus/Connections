@@ -2,7 +2,7 @@ import Foundation
 import Contacts
 
 extension CNContact: Identifiable {
-    public var id: String { identifier }
+    public var id: UUID { UUID(uuidString: identifier)! }
 }
 
 extension CNGroup: Identifiable {
