@@ -27,16 +27,15 @@ internal final class ContainersObserver: NSObject, ObservableObject {
     }
 
     private func refetch(animated: Bool) {
-        var containers: [CNContainer] = []
-
-        defer {
-            withAnimation(animated ? self.animation : nil) { self.results = containers }
-        }
-
-        do {
-            containers = try self.store.containers(matching: self.predicate)
-        } catch {
-            print(error)
+        DispatchQueue.global().async { [weak self] in
+            guard let self else { return }
+            do {
+                var containers: [CNContainer] = []
+                containers = try self.store.containers(matching: self.predicate)
+                DispatchQueue.main.async {
+                    withAnimation(animated ? self.animation : nil) { self.results = containers }
+                }
+            } catch { print(error) }
         }
     }
 }

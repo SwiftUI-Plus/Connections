@@ -27,16 +27,15 @@ internal final class GroupsObserver: NSObject, ObservableObject {
     }
 
     private func refetch(animated: Bool) {
-        var groups: [CNGroup] = []
-
-        defer {
-            withAnimation(animated ? self.animation : nil) { self.results = groups }
-        }
-
-        do {
-            groups = try self.store.groups(matching: self.predicate)
-        } catch {
-            print(error)
+        DispatchQueue.global().async { [weak self] in
+            guard let self else { return }
+            do {
+                var groups: [CNGroup] = []
+                groups = try self.store.groups(matching: self.predicate)
+                DispatchQueue.main.async {
+                    withAnimation(animated ? self.animation : nil) { self.results = groups }
+                }
+            } catch { print(error) }
         }
     }
 }

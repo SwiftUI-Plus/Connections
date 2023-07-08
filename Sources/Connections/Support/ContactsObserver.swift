@@ -27,18 +27,18 @@ internal final class ContactsObserver: NSObject, ObservableObject {
     }
 
     private func refetch(animated: Bool) {
-        var contacts: [CNContact] = []
+        DispatchQueue.global().async { [weak self] in
+            guard let self else { return }
 
-        defer {
-            withAnimation(animated ? self.animation : nil) { self.results = contacts }
-        }
-
-        do {
-            try self.store.enumerateContacts(with: self.request) { contact, _ in
-                contacts.append(contact)
-            }
-        } catch {
-            print(error)
+            do {
+                var contacts: [CNContact] = []
+                try store.enumerateContacts(with: request) { contact, _ in
+                    contacts.append(contact)
+                }
+                DispatchQueue.main.async {
+                    withAnimation(animated ? self.animation : nil) { self.results = contacts }
+                }
+            } catch { print(error) }
         }
     }
 }
