@@ -9,7 +9,7 @@ struct ContactView: View {
     @State private var error: Error?
 
     // We just pass along the identifier and then lets the property wrapper handle the fetch and observation
-    init(identifier: CNContact.ID) {
+    init(identifier: String) {
         _contact = FetchContact(
             idenfifier: identifier,
             keysToFetch: .allExcludingNote
